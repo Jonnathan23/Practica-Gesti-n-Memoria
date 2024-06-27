@@ -51,8 +51,15 @@ function App() {
                     <label htmlFor="references">Referencias</label>
                     <textarea className="camp__txtarea" name="references" id="references" rows={1} cols={10} placeholder="Ej: 2, 4, 6, ..."></textarea>
                   </div>
+
+                  <div className="camp camp__button">
+                    <button className="button" type="submit">Calcular</button>
+                  </div>
+                  
                 </div>
               </div>
+
+
 
             </fieldset>
           </form>
