@@ -186,6 +186,13 @@ fieldset{
 
   transform: scale(1.075);
 }
+
+.button:disabled{
+  opacity: .3;
+  cursor: default;
+  transform: none;  
+}
+
 @media (min-width: 600px) {
    
   
@@ -211,7 +218,7 @@ fieldset{
   }
 }
 
-/** HIDE */
+/** HIDE 
 .algoritms__hide{
   opacity: 0;
   height: 0;
@@ -221,6 +228,7 @@ fieldset{
   opacity: 1;
   height: auto;
 }
+*/
 
 /** FOOTER */
 footer {
