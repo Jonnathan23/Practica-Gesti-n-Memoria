@@ -6,3 +6,6 @@ export class ConverError extends Error {
     }
 }
 
+export class DiferentLong extends Error{
+    
+}

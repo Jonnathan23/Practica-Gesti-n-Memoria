@@ -3,6 +3,9 @@ export type Algorithm = {
     frames: number
     referencesTxt: string
     references:number[]
+    typeAlgorithm: number
+    calculate:boolean
+    
 }
 
 export type TypesAlgorithms = {

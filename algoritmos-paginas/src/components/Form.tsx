@@ -1,23 +1,20 @@
-import { useState, ChangeEvent, FormEvent, Dispatch } from "react";
-import { Algorithm} from "../types";
-import { AlgorithmsActions } from "../reducers/algorithms-reducer";
-import { ConverError } from "../Errors/errors";
-import { errorConvert, errorUnknow } from "../Errors/alerts";
+import { ChangeEvent, FormEvent  } from "react";
+import { Algorithm } from "../types";
+import { ConverError, DiferentLong } from "../Errors/errors";
+import { errorConvert, errorDiferentLongs, errorUnknow } from "../Errors/alerts";
 import { typesAlgorithms } from "../assets/data/data";
 
 type FormProps = {
-    dispatch: Dispatch<AlgorithmsActions>
-    inicialState: Algorithm    
-
+    algorithms: Algorithm
+    setAlgorithms: React.Dispatch<React.SetStateAction<Algorithm>>
 }
 
+export default function Form({ algorithms, setAlgorithms }: FormProps) {
 
-export default function Form({ dispatch, inicialState }: FormProps) {
 
-    const [algorithms, setAlgorithms] = useState<Algorithm>(inicialState);
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-        const isNumerField = ['numberPages', 'frames'].includes(e.target.id);        
+    const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLSelectElement>) => {
+        const isNumerField = ['numberPages', 'frames', 'typeAlgorithm'].includes(e.target.id);
         setAlgorithms({
             ...algorithms,
             [e.target.id]: isNumerField ? +e.target.value : e.target.value
@@ -29,7 +26,7 @@ export default function Form({ dispatch, inicialState }: FormProps) {
             const newText = text.split(',').map(text => text.replace(/ /g, ''));
 
             const converReferences = newText.map(refer => {
-                const number = +refer                
+                const number = +refer
                 if (isNaN(number)) {
                     throw new ConverError("No conversión")
                 }
@@ -57,11 +54,22 @@ export default function Form({ dispatch, inicialState }: FormProps) {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('Submit ....')
 
         const refereences = removeSpaces(algorithms.referencesTxt)
         if (refereences) {
-            dispatch({ type: "save-activity", payload: { newAlgorithm: algorithms } })
+            try {
+                if (refereences.length !== algorithms.numberPages)
+                    throw new DiferentLong("Error Diferentes longitudes")
+                setAlgorithms({
+                    ...algorithms,
+                    'references': refereences,
+                    'calculate': true
+                })
+            } catch (error) {
+                if (error instanceof DiferentLong) {
+                    errorDiferentLongs()
+                }
+            }
         }
     }
 
@@ -118,11 +126,13 @@ export default function Form({ dispatch, inicialState }: FormProps) {
 
                         <div className="camp camp__cont__cb" >
                             <label htmlFor="typeAlgorithm">Tipo de algoritmo</label>
-                            <select className="camp__cb"  name="typeAlgorithm" id="typeAlgorithm" >
+                            <select className="camp__cb" name="typeAlgorithm" id="typeAlgorithm"
+                                onChange={handleChange}
+                            >
                                 {
-                                typesAlgorithms.map((type) => (
-                                    <option value={type.id}> {type.name}</option>
-                                ))
+                                    typesAlgorithms.map((type) => (
+                                        <option value={type.id}> {type.name}</option>
+                                    ))
                                 }
                             </select>
                         </div>

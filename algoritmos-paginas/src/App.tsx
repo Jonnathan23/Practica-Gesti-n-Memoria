@@ -1,13 +1,24 @@
-import { useReducer } from "react"
+import { useState } from "react"
 import Form from "./components/Form"
-import { algorithmReducer, initialState } from "./reducers/algorithms-reducer"
+import { Algorithm } from "./types"
 import Fcfs from "./components/Fcfs"
-import References from "./components/References"
+import Optimo from "./components/Optimo"
+import Lru from "./components/Lru"
+
 
 function App() {
   //const [count, setCount] = useState(0)
-  const inicialState = { numberPages: 0, frames: 0, referencesTxt: '', references: [] }
-  const [state, dispatch] = useReducer(algorithmReducer, initialState)
+  const inicialState: Algorithm = {
+    numberPages: 0,
+    frames: 0,
+    referencesTxt: "",
+    references: [],
+    typeAlgorithm: 1,
+    calculate: false
+
+  }
+  const [algorithms, setAlgorithms] = useState<Algorithm>(inicialState);
+
   return (
     <>
       <header className='header'>
@@ -18,49 +29,40 @@ function App() {
       <main>
         <div className="background__camp">
           <Form
-            dispatch={dispatch}
-            inicialState={inicialState}
+            algorithms={algorithms}
+            setAlgorithms={setAlgorithms}
           />
         </div>
 
-
-        {
-        state.algorithm.numberPages !== 0 &&
+        {algorithms.calculate && (
           <div id="algorithms_id" className="algorithms__background algorithms__show">
             <div className="algorithms__content">
-              <section className="algorithms background__camp">
-                {
-                  /**
-                   * TODO: Metodo: FCFS (primera página en entrar, primera en salir)
-                   */
-                  <Fcfs />
-                }
+              {algorithms.typeAlgorithm === 1 && (
+                <section className="algorithms background__camp">
+                  {<Fcfs />}
+                </section>
+              )}
 
-              </section>
+              {algorithms.typeAlgorithm === 2 && (
+                <section className="algorithms background__camp">
+                  {<Optimo />}
+                </section>
+              )}
 
-              <section className="algorithms background__camp">
-                {
-                  /**
-                   * TODO: Metodo: OPTIMO (se reemplaza la página que no se utilizará en más tiempo)
-                   */
-                }
-
-              </section>
-
-              <section className="algorithms background__camp">
-                {
-                  /**
-                   * TODO: Metodo: LRU (se reemplaza la página menos recientemente utilizada)
-                   */
-                }
-              </section>
+              {algorithms.typeAlgorithm === 3 && (
+                <section className="algorithms background__camp">
+                  {<Lru 
+                  algorithms={algorithms}
+                  />}
+                </section>
+              )}
 
             </div>
           </div>
-        }
+        )}
 
 
-      </main>
+      </main >
 
       <footer>
         <div className="footer__content">

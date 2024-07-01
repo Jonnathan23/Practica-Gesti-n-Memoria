@@ -20,3 +20,13 @@ export const errorUnknow = () => {
         timerProgressBar: true
     })
 }
+
+export const errorDiferentLongs = () => {
+    Swal.fire({
+        title:'Error con el numero de referencias',
+        icon: "error",
+        text:"El número de referencias es distinto a la cantidad de referencias ingresadas!",
+        timer: 5000,
+        timerProgressBar: true
+    })
+}
