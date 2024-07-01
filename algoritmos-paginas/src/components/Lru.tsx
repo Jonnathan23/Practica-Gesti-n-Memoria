@@ -1,6 +1,6 @@
 import { Algorithm } from "../types"
 import { calculateLRU } from "../algorithms/calculate.algorithms"
-
+import { errorUnknow } from "../Errors/alerts"
 
 type LruProps = {
     algorithms: Algorithm
@@ -19,22 +19,15 @@ export default function Lru({ algorithms }: LruProps) {
         <>
             <h5>LRU</h5>
             <p>Referencias: {algorithms.referencesTxt};</p>
-            <div className="cont__table">
-                <table className="algorithm__table">
-                    <thead>
-                        <tr>
-                            
-                        </tr>
-                    </thead>
-                    <tbody className="table__body">
+            <div>
+                <table>
+                    <tbody>
                         {references.map((rowReference, i) => (
-                            <tr key={i} className="table__row">
+                            <tr key={i}>
                                 {rowReference.map((colReference, j) => (
-                                    <td key={j} className="table__col" >{colReference}</td>
-                                    
+                                    <td key={j}>{colReference}</td>
                                 ))}
                             </tr>
-                            
                         ))}
                     </tbody>
                 </table>
