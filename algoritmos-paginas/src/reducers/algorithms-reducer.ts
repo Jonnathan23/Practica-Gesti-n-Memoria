@@ -16,8 +16,7 @@ export const initialState: AlgorithmsState = {
 
 export const algorithmReducer = (state: AlgorithmsState = initialState, algorithmAction: AlgorithmsActions) => {
     if (algorithmAction.type === 'save-activity') {
-        //console.log(algorithm.payloead.newAlgorithm)
-        
+               
         return {
             ...state,
             algorithm: algorithmAction.payload.newAlgorithm,

@@ -157,6 +157,37 @@ fieldset{
     
 }
 
+
+
+.camp__cont__cb{
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  margin-right: 10%;
+}
+
+.camp__cb{
+  width: 35%;
+  max-width: 15rem;
+  padding: .7rem;
+
+  text-align: center;
+
+  color: var(--marine-blue);
+  border: solid .1rem var(--pastel-blue);
+  border-radius: .5rem;  
+}
+
+.camp__cb:hover{
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--pastel-blue);
+}
+
+.camp__cb:focus{
+  border-color: var(--marine-blue);
+}
+
 .camp__button{
   display: flex;
   justify-content: end;
@@ -218,17 +249,6 @@ fieldset{
   }
 }
 
-/** HIDE 
-.algoritms__hide{
-  opacity: 0;
-  height: 0;
-}
-
-.algoritms__show {
-  opacity: 1;
-  height: auto;
-}
-*/
 
 /** FOOTER */
 footer {

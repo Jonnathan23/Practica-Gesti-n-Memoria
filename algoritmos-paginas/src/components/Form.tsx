@@ -1,10 +1,13 @@
 import { useState, ChangeEvent, FormEvent, Dispatch } from "react";
-import { Algorithm } from "../types";
+import { Algorithm} from "../types";
 import { AlgorithmsActions } from "../reducers/algorithms-reducer";
+import { ConverError } from "../Errors/errors";
+import { errorConvert, errorUnknow } from "../Errors/alerts";
+import { typesAlgorithms } from "../assets/data/data";
 
 type FormProps = {
     dispatch: Dispatch<AlgorithmsActions>
-    inicialState: Algorithm
+    inicialState: Algorithm    
 
 }
 
@@ -14,8 +17,7 @@ export default function Form({ dispatch, inicialState }: FormProps) {
     const [algorithms, setAlgorithms] = useState<Algorithm>(inicialState);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-        const isNumerField = ['numberPages', 'frames'].includes(e.target.id);
-        console.log(e.target.value)
+        const isNumerField = ['numberPages', 'frames'].includes(e.target.id);        
         setAlgorithms({
             ...algorithms,
             [e.target.id]: isNumerField ? +e.target.value : e.target.value
@@ -25,25 +27,32 @@ export default function Form({ dispatch, inicialState }: FormProps) {
     const removeSpaces = (text: string) => {
         try {
             const newText = text.split(',').map(text => text.replace(/ /g, ''));
+
             const converReferences = newText.map(refer => {
-                const number = +refer
-                console.log(`number: ${number}; type: ${typeof number}`)
+                const number = +refer                
                 if (isNaN(number)) {
-                    throw new Error("No conversión")
+                    throw new ConverError("No conversión")
                 }
                 return number
             })
             console.log(converReferences);
             return converReferences
         } catch (error) {
-            console.log("Alerta")
+
+            if (error instanceof ConverError) {
+                errorConvert()
+            } else {
+                errorUnknow()
+            }
+
             return null;
         }
     };
 
     const isValidAlgorithms = () => {
-        const { numberPages, frames, referencesTxt } = algorithms;
+        const { numberPages, frames } = algorithms;
         return numberPages > 0 && frames > 0
+            && Number.isInteger(numberPages) && Number.isInteger(frames)
     }
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -107,15 +116,23 @@ export default function Form({ dispatch, inicialState }: FormProps) {
                             </textarea>
                         </div>
 
+                        <div className="camp camp__cont__cb" >
+                            <label htmlFor="typeAlgorithm">Tipo de algoritmo</label>
+                            <select className="camp__cb"  name="typeAlgorithm" id="typeAlgorithm" >
+                                {
+                                typesAlgorithms.map((type) => (
+                                    <option value={type.id}> {type.name}</option>
+                                ))
+                                }
+                            </select>
+                        </div>
+
                         <div className="camp camp__button">
                             <button className="button" type="submit" disabled={!isValidAlgorithms()}>Calcular</button>
                         </div>
 
                     </div>
                 </div>
-
-
-
             </fieldset>
         </form>
     );

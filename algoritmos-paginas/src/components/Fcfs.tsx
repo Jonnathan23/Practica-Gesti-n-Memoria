@@ -7,14 +7,12 @@ export default function Fcfs() {
 
             <form action="">
                 <fieldset>
-                    <legend>FCFS</legend>
-                   
+                    <legend>FCFS</legend>                   
                 </fieldset>
             </form>
 
             <table>
                 <tbody>
-
                 </tbody>
             </table>
 

@@ -6,7 +6,7 @@ import References from "./components/References"
 
 function App() {
   //const [count, setCount] = useState(0)
-  const inicialState = { numberPages: 0, frames: 0, referencesTxt: '', references:[] }
+  const inicialState = { numberPages: 0, frames: 0, referencesTxt: '', references: [] }
   const [state, dispatch] = useReducer(algorithmReducer, initialState)
   return (
     <>
@@ -23,39 +23,42 @@ function App() {
           />
         </div>
 
-        
-{}
-        <div id="algorithms_id" className="algorithms__background algorithms__show">
-          <div className="algorithms__content">
-            <section className="algorithms background__camp">
-              {
-                /**
-                 * TODO: Metodo: FCFS (primera página en entrar, primera en salir)
-                 */
-                <Fcfs />
-              }
 
-            </section>
+        {
+        state.algorithm.numberPages !== 0 &&
+          <div id="algorithms_id" className="algorithms__background algorithms__show">
+            <div className="algorithms__content">
+              <section className="algorithms background__camp">
+                {
+                  /**
+                   * TODO: Metodo: FCFS (primera página en entrar, primera en salir)
+                   */
+                  <Fcfs />
+                }
 
-            <section className="algorithms background__camp">
-              {
-                /**
-                 * TODO: Metodo: OPTIMO (se reemplaza la página que no se utilizará en más tiempo)
-                 */
-              }
+              </section>
 
-            </section>
+              <section className="algorithms background__camp">
+                {
+                  /**
+                   * TODO: Metodo: OPTIMO (se reemplaza la página que no se utilizará en más tiempo)
+                   */
+                }
 
-            <section className="algorithms background__camp">
-              {
-                /**
-                 * TODO: Metodo: LRU (se reemplaza la página menos recientemente utilizada)
-                 */
-              }
-            </section>
+              </section>
 
+              <section className="algorithms background__camp">
+                {
+                  /**
+                   * TODO: Metodo: LRU (se reemplaza la página menos recientemente utilizada)
+                   */
+                }
+              </section>
+
+            </div>
           </div>
-        </div>
+        }
+
 
       </main>
 
