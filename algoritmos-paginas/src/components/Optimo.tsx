@@ -16,13 +16,14 @@ export default function Optimo({ algorithms }: FcfsOptimo) {
     const pageFaults = result.pageFaults
     return (
         <>
-            <h5>OPTIMO</h5>
-            <p>Referencias: {algorithms.referencesTxt};</p>
+            <h5 className="type__name">OPTIMO</h5>            
             <div className="cont__table">
                 <table className="algorithm__table">
                     <thead>
                         <tr>
-
+                            {algorithms.references.map(col => (
+                                <th>{col}</th>
+                            ))}
                         </tr>
                     </thead>
                     <tbody className="table__body">
@@ -40,7 +41,7 @@ export default function Optimo({ algorithms }: FcfsOptimo) {
             </div>
 
 
-            <p>Fallos de página: <span>{pageFaults}</span></p>
+            <p className="page__founts">Fallos de página: <span>{pageFaults}</span></p>
         </>
     )
 }

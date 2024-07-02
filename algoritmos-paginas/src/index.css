@@ -250,34 +250,40 @@ fieldset{
 }
 
 /** TABLE */
-.cont__table {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-
+.type__name{
+  color: var(--marine-blue);
 }
-table{
-  table-layout: fixed;
-  width: 100%;
-  height: 100%;
+
+.algorithm__table{    
   border-collapse: collapse;
-  border: .2rem solid var(--marine-blue);
-}
-tbody{
+  width: 100%;
+
+  border: .3rem solid var(--purplish-blue);
+
+  margin: auto;
   text-align: center;
 }
-.algorithm__table tr {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;  
-  border-top: .2rem solid var(--marine-blue);
+
+.algorithm__table th{
+  padding: .5rem;
+  color: var(--white);
+  background-color: var(--purplish-blue); 
 }
 
-.algorithm__table td {
-  padding: 0 1rem;
-  border-right: solid var(--marine-blue) ;
+.algorithm__table td{
+  /*border: .2rem solid var(--purplish-blue);*/
+  border-left: .2rem solid var(--purplish-blue);
+  border-right: .2rem solid var(--purplish-blue);
+  border-bottom: .1rem solid var(--cool-gray);
+}
 
+.page__founts{
+  color: var(--cool-gray);
+}
+
+.page__founts span{
+  color: var(--marine-blue);
+  font-weight: bold;
 }
 
 

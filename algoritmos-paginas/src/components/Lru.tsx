@@ -17,13 +17,14 @@ export default function Lru({ algorithms }: LruProps) {
 
     return (
         <>
-            <h5>LRU</h5>
-            <p>Referencias: {algorithms.referencesTxt};</p>
+            <h5 className="type__name">LRU</h5>            
             <div className="cont__table">
                 <table className="algorithm__table">
                     <thead>
                         <tr>
-
+                            {algorithms.references.map(col => (
+                                <th>{col}</th>
+                            ))}
                         </tr>
                     </thead>
                     <tbody className="table__body">
@@ -39,7 +40,7 @@ export default function Lru({ algorithms }: LruProps) {
                 </table>
             </div>
 
-            <p>Fallos de página: <span>{pageFaults}</span></p>
+            <p className="page__founts">Fallos de página: <span>{pageFaults}</span></p>
 
 
         </>
