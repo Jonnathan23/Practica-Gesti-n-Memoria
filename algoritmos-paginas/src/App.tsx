@@ -39,13 +39,17 @@ function App() {
             <div className="algorithms__content">
               {algorithms.typeAlgorithm === 1 && (
                 <section className="algorithms background__camp">
-                  {<Fcfs />}
+                  {<Fcfs 
+                  algorithms={algorithms}
+                  />}
                 </section>
               )}
 
               {algorithms.typeAlgorithm === 2 && (
                 <section className="algorithms background__camp">
-                  {<Optimo />}
+                  {<Optimo 
+                  algorithms={algorithms}
+                  />}
                 </section>
               )}
 
