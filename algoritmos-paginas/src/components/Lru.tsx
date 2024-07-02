@@ -30,7 +30,7 @@ export default function Lru({ algorithms }: LruProps) {
                         {references.map((rowReference, i) => (
                             <tr key={i} className="table__row">
                                 {rowReference.map((colReference, j) => (
-                                    <td key={j} className="table__col" >{colReference}</td>
+                                    <td key={j} className="table__col" >{colReference === -1 ? "X" : colReference}</td>
 
                                 ))}
                             </tr>

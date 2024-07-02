@@ -19,7 +19,7 @@ export function calculateFcfs({ numberPages, numberFrames, references }: Inicial
     let memory = []
 
     for (let i = 0; i < numberFrames; i++) {
-        memory[i] = new Array(numberPages).fill(0);
+        memory[i] = new Array(numberPages).fill(-1);
     }
 
     for (let i = 0; i < numberPages; i++) {
@@ -73,7 +73,7 @@ export function calculateOPTIMO({ numberPages, numberFrames, references }: Inici
     let memory = []
 
     for (let i = 0; i < numberFrames; i++) {
-        memory[i] = new Array(numberPages).fill(0);
+        memory[i] = new Array(numberPages).fill(-1);
     }
 
     for (let i = 0; i < numberPages; i++) {
@@ -88,10 +88,10 @@ export function calculateOPTIMO({ numberPages, numberFrames, references }: Inici
         if (!memory.some(row => row[i] === page)) {
             pageFaults++;
 
-            if (memory.some(row => row[i] === 0)) {
+            if (memory.some(row => row[i] === -1)) {
                 // Si hay un marco vacío, simplemente lo asignamos
                 for (let j = 0; j < numberFrames; j++) {
-                    if (memory[j][i] === 0) {
+                    if (memory[j][i] === -1) {
                         memory[j][i] = page;
                         break;
                     }
@@ -144,7 +144,7 @@ export function calculateLRU({ numberPages, numberFrames, references }: InicialD
     let usageHistory: number[] = []
 
     for (let i = 0; i < numberFrames; i++) {
-        memory[i] = new Array(numberPages).fill(0);
+        memory[i] = new Array(numberPages).fill(-1);
     }
 
     for (let i = 0; i < numberPages; i++) {
@@ -159,10 +159,10 @@ export function calculateLRU({ numberPages, numberFrames, references }: InicialD
         if (!memory.some(row => row[i] === page)) {
             pageFaults++;
 
-            if (memory.some(row => row[i] === 0)) {
+            if (memory.some(row => row[i] === -1)) {
                 // If there is an empty frame, assign it
                 for (let j = 0; j < numberFrames; j++) {
-                    if (memory[j][i] === 0) {
+                    if (memory[j][i] === -1) {
                         memory[j][i] = page;
                         break;
                     }

@@ -7,5 +7,9 @@ export class ConverError extends Error {
 }
 
 export class DiferentLong extends Error{
-    
+    name: string
+    constructor(message:string){
+        super(message)
+        this.name = "ErrorDiferentLong"
+    }
 }

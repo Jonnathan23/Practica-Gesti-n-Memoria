@@ -19,7 +19,7 @@ export default function Fcfs({ algorithms }: FcfsProps) {
     return (
         <>
 
-<h5>FCFS</h5>
+            <h5>FCFS</h5>
             <p>Referencias: {algorithms.referencesTxt};</p>
             <div className="cont__table">
                 <table className="algorithm__table">
@@ -32,7 +32,7 @@ export default function Fcfs({ algorithms }: FcfsProps) {
                         {references.map((rowReference, i) => (
                             <tr key={i} className="table__row">
                                 {rowReference.map((colReference, j) => (
-                                    <td key={j} className="table__col" >{colReference}</td>
+                                    <td key={j} className="table__col" >{colReference === -1 ? "X" : colReference}</td>
 
                                 ))}
                             </tr>

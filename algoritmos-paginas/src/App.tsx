@@ -1,23 +1,14 @@
-import { useState } from "react"
 import Form from "./components/Form"
-import { Algorithm } from "./types"
 import Fcfs from "./components/Fcfs"
 import Optimo from "./components/Optimo"
 import Lru from "./components/Lru"
+import { useAlgorithms } from "./hooks/useAlgoritms"
 
 
 function App() {
   //const [count, setCount] = useState(0)
-  const inicialState: Algorithm = {
-    numberPages: 0,
-    frames: 0,
-    referencesTxt: "",
-    references: [],
-    typeAlgorithm: 1,
-    calculate: false
-
-  }
-  const [algorithms, setAlgorithms] = useState<Algorithm>(inicialState);
+ 
+  const {algorithms, handleChange, isValidAlgorithms, handleSubmit} = useAlgorithms();
 
   return (
     <>
@@ -30,7 +21,9 @@ function App() {
         <div className="background__camp">
           <Form
             algorithms={algorithms}
-            setAlgorithms={setAlgorithms}
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+            isValidAlgorithms={isValidAlgorithms}
           />
         </div>
 

@@ -5,7 +5,7 @@ type FcfsOptimo = {
     algorithms: Algorithm
 }
 
-export default function Optimo({algorithms}:FcfsOptimo) {
+export default function Optimo({ algorithms }: FcfsOptimo) {
     const evaluate = {
         numberPages: algorithms.numberPages,
         numberFrames: algorithms.frames,
@@ -16,7 +16,7 @@ export default function Optimo({algorithms}:FcfsOptimo) {
     const pageFaults = result.pageFaults
     return (
         <>
-        <h5>OPTIMO</h5>
+            <h5>OPTIMO</h5>
             <p>Referencias: {algorithms.referencesTxt};</p>
             <div className="cont__table">
                 <table className="algorithm__table">
@@ -29,7 +29,7 @@ export default function Optimo({algorithms}:FcfsOptimo) {
                         {references.map((rowReference, i) => (
                             <tr key={i} className="table__row">
                                 {rowReference.map((colReference, j) => (
-                                    <td key={j} className="table__col" >{colReference}</td>
+                                    <td key={j} className="table__col" >{colReference === -1 ? "X" : colReference}</td>
 
                                 ))}
                             </tr>
